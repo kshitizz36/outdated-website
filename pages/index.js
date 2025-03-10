@@ -1,38 +1,16 @@
-// pages/index.js (Outdated Example)
+import { function1, function2 } from "library";
 
-import React from 'react';
-import Head from 'next/head';
-
-class Home extends React.Component {
-  // getInitialProps is now outdated, replaced by getServerSideProps/getStaticProps/etc.
-  static async getInitialProps(context) {
-    // Fetch some data on the server
-    const data = await fetch('https://api.example.com/posts').then((res) =>
-      res.json()
-    );
-
-    return {
-      posts: data,
-    };
+export default function Component() {
+  // Traditional way of declaring state variables
+  var state = { 
+    prop1: function1()
   }
 
-  render() {
-    const { posts } = this.props;
-
-    return (
-      <div>
-        <Head>
-          <title>Outdated Next.js Example</title>
-        </Head>
-        <h1>Outdated Next.js Example</h1>
-        <ul>
-          {posts.map((post) => (
-            <li key={post.id}>{post.title}</li>
-          ))}
-        </ul>
-      </div>
-    );
-  }
+  return (
+    <div>
+      {/* using dangerouslySetInnerHTML: not recommended */} 
+        <h1 dangerouslySetInnerHTML={{ __html: "Welcome to My Website" }}></h1>
+        <p>This is a basic example.</p>
+    </div>
+  )
 }
-
-export default Home;
