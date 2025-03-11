@@ -1,13 +1,19 @@
-import { Html, Head, Main, NextScript } from "next/document";
+import Document, { Html, Head, Main, NextScript } from 'next/document';
 
-export default function Document() {
-  return (
-    <Html lang="en">
-      <Head />
-      <body className="antialiased">
-        <Main />
-        <NextScript />
-      </body>
-    </Html>
-  );
-}
+export default class Document extends Document {
+  static async getInitialProps({ renderPage }) {
+    const { html, head, error } = renderPage();
+    return { html, head, error };
+  }
+
+  render() {
+    return (
+      <Html lang={''}):
+        <Head />
+        <body className={''}>
+          <Main />
+          <NextScript />
+        </body>
+      </Html>
+    )}
+  }
