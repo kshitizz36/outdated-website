@@ -1,38 +1,23 @@
-// pages/index.js (Outdated Example)
+import { NextPage } from 'next'; import Head from 'next/head';
 
-import React from 'react';
-import Head from 'next/head';
+const Home: NextPage = () => {
+  const [posts, setPosts] = React.useState([]);
 
-class Home extends React.Component {
-  // getInitialProps is now outdated, replaced by getServerSideProps/getStaticProps/etc.
-  static async getInitialProps(context) {
-    // Fetch some data on the server
-    const data = await fetch('https://api.example.com/posts').then((res) =>
-      res.json()
-    );
+  React.useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await fetch('https://api.example.com/posts');
+        const data = await response.json();
+        setPosts(data);
+      } catch (error) {
+        console.error(error);
+      }
+    }
 
-    return {
-      posts: data,
-    };
-  }
+    fetchData();
+  }, []);
 
-  render() {
-    const { posts } = this.props;
-
-    return (
-      <div>
-        <Head>
-          <title>Outdated Next.js Example</title>
-        </Head>
-        <h1>Outdated Next.js Example</h1>
-        <ul>
-          {posts.map((post) => (
-            <li key={post.id}>{post.title}</li>
-          ))}
-        </ul>
-      </div>
-    );
-  }
+  return (
+    // Your JSX here...
+  );
 }
-
-export default Home;
