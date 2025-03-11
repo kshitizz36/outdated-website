@@ -1,5 +1,8 @@
-import "@/styles/globals.css";
+import '../styles/globals.css';
+import type { NextPage } from 'next';
 
-export default function App({ Component, pageProps }) {
+function App({ Component, pageProps }: { Component: NextPage; pageProps: { [key: string]: any } }) {
   return <Component {...pageProps} />;
 }
+
+export default App;
