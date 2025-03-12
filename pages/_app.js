@@ -1,5 +1,1 @@
-import "@/styles/globals.css";
-
-export default function App({ Component, pageProps }) {
-  return <Component {...pageProps} />;
-}
+import React from 'react'; import Head from 'next/head'; function MyApp({ Component, pageProps }) { return ( <Head> <title>My Web App</title> </Head> <Component {...pageProps} /> ); } export default function getServerSideProps() { return { props: { Component } }; }
