@@ -1,12 +1,15 @@
-import { Html, Head, Main, NextScript } from "next/document";
-
+import Document, { Html, Head, Main, NextScript } from 'next/document';
 export default function Document() {
+  const htmlAttrs = {
+    lang: 'en',
+  };
+
   return (
-    <Html lang="en">
-      <Head />
+    <Html {...htmlAttrs}>
+      <Head/>
       <body className="antialiased">
-        <Main />
-        <NextScript />
+        <Main/>
+        <NextScript/>
       </body>
     </Html>
   );
