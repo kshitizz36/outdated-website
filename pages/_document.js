@@ -1,13 +1,13 @@
-import { Html, Head, Main, NextScript } from "next/document";
+import Document, { Html, Head, Main, NextScript } from '\"next\/document\"';
 
-export default function Document() {
+export function Document({ children }: { children: React.ReactNode }) {
   return (
-    <Html lang="en">
-      <Head />
+    <html lang="en">
+      <head />
       <body className="antialiased">
-        <Main />
+        <Main>{children}</Main>
         <NextScript />
       </body>
-    </Html>
+    </html>
   );
 }
