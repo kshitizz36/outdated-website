@@ -1,5 +1,17 @@
-import "@/styles/globals.css";
+import {} from "next";
+import Head from "next/head";
+import Meta from "../components/Meta";
 
-export default function App({ Component, pageProps }) {
-  return <Component {...pageProps} />;
+import Head from "next/head";
+
+function MyApp({ Component, pageProps }) {
+    return (
+        <>    <Meta title />
+
+        <Component {...pageProps} />
+    </>    
+    )    
 }
+
+export default MyApp;
+
