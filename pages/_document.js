@@ -1,13 +1,15 @@
-import { Html, Head, Main, NextScript } from "next/document";
+import Document, { Html, Head, Main, NextScript } from 'next/document';
 
-export default function Document() {
-  return (
-    <Html lang="en">
+const MyApp = ({ Component, pageProps }) => {
+  return (<>
+    <Html lang='en'>
       <Head />
-      <body className="antialiased">
+      <body className='antialiased'>
         <Main />
         <NextScript />
       </body>
     </Html>
-  );
-}
+  </>);
+};
+
+export default MyApp;

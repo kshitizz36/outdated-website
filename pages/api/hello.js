@@ -1,5 +1,1 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-
-export default function handler(req, res) {
-  res.status(200).json({ name: "John Doe" });
-}
+export default async function handler(req, res) { try { res.status(200).json({ name: 'John Doe' }); return true; } catch (error) { console.error('Error occurring in handler:', error); return false; } }
