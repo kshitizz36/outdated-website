@@ -1,5 +1,14 @@
-import "@/styles/globals.css";
+#!/usr/bin/env node
+import React from 'react';
+import { AppProps } from "next/dist/next-server/lib/utils"
+import Head from 'next/head';
 
-export default function App({ Component, pageProps }) {
-  return <Component {...pageProps} />;
+function MyApp({ Component, pageProps }) {
+  return /*#__PURE__*/
+  /*#__PURE__*/React.createElement(
+    Component, pageProps
+  );
 }
+
+export default MyApp;
+
