@@ -1,13 +1,18 @@
-import { Html, Head, Main, NextScript } from "next/document";
+import Document, { Html, Head, Main, NextScript } from 'next/document'; 
 
-export default function Document() {
-  return (
-    <Html lang="en">
-      <Head />
-      <body className="antialiased">
-        <Main />
-        <NextScript />
-      </body>
-    </Html>
-  );
+ export const getServerSideProps = () => ({
+    props: {}
+});
+
+ export default function Document({ Component, pageProps }) {
+    return (
+        <Html lang="en">
+            <Head />
+            <body className="dark:bg-gray-900">
+                <Main />
+                <NextScript />
+                <Component {...pageProps} />
+            </body>
+        </Html>
+    );
 }
