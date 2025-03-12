@@ -1,38 +1,35 @@
-// pages/index.js (Outdated Example)
-
-import React from 'react';
+import { useState, useEffect } from 'react';
 import Head from 'next/head';
+import axios from 'axios';
 
-class Home extends React.Component {
-  // getInitialProps is now outdated, replaced by getServerSideProps/getStaticProps/etc.
-  static async getInitialProps(context) {
-    // Fetch some data on the server
-    const data = await fetch('https://api.example.com/posts').then((res) =>
-      res.json()
-    );
+const Home = () => {
+  const [posts, setPosts] = useState([]);
 
-    return {
-      posts: data,
+  useEffect(() => {
+    const fetchPosts = async () => {
+      const response = await axios.get('https://api.example.com/posts');
+      setPosts(response.data);
     };
-  }
+    fetchPosts();
+  }, []);
 
-  render() {
-    const { posts } = this.props;
-
-    return (
-      <div>
-        <Head>
-          <title>Outdated Next.js Example</title>
-        </Head>
-        <h1>Outdated Next.js Example</h1>
-        <ul>
-          {posts.map((post) => (
-            <li key={post.id}>{post.title}</li>
-          ))}
-        </ul>
-      </div>
-    );
-  }
+  return (
+    <div>
+      <Head>
+        <title>Up-to-date Next.js Example</title>
+      </Head>
+      <h1>Up-to-date Next.js Example</h1>
+      <ul>
+        {posts.map((post) => (
+          <li key={post.id}>{post.title}</li>
+        ))}
+      </ul>
+    </div>
+  );
 }
 
-export default Home;
+Home.getLayout = function getLayout() {
+  return Home;
+};
+
+export { Home };
