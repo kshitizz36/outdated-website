@@ -1,5 +1,13 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-
-export default function handler(req, res) {
-  res.status(200).json({ name: "John Doe" });
+export const handler = async (event) => {
+    try {
+        return {
+            statusCode: 200,
+            body: JSON.stringify({ name: 'John Doe' })
+        };
+    } catch (error) {
+        return {
+            statusCode: 500,
+            body: JSON.stringify({ message: 'Error' })
+        };
+    }
 }
