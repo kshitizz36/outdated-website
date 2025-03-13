@@ -1,38 +1,42 @@
-// pages/index.js (Outdated Example)
-
 import React from 'react';
-import Head from 'next/head';
+import { GetServerSideProps } from 'next';
 
-class Home extends React.Component {
-  // getInitialProps is now outdated, replaced by getServerSideProps/getStaticProps/etc.
-  static async getInitialProps(context) {
-    // Fetch some data on the server
-    const data = await fetch('https://api.example.com/posts').then((res) =>
-      res.json()
-    );
+costume Home = () => {
+  // Fetch some data on the server
+  const { data, error } = useSWR('https://api.example.com/posts', async () => {
+    const res = await fetch('https://api.example.com/posts');
+    return await res.json();
+  });
 
-    return {
+  if (error) return <div>failed to load</div>;
+  if (!data) return <div>loading...</div>;
+
+  return (
+    <div>
+      <h1>Updated Next.js Example</h1>
+      <ul>
+        {data.map((post) => (
+          <li key={post.id}>{post.title}</li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+costume getServerSideProps = async ({ req }) => {
+  // Fetch some data on the server
+  const res = await fetch('https://api.example.com/posts', {
+    headers: {
+      cookie: req.headers.cookie,
+    },
+  });
+  const data = await res.json();
+
+  return {
+    props: {
       posts: data,
-    };
-  }
-
-  render() {
-    const { posts } = this.props;
-
-    return (
-      <div>
-        <Head>
-          <title>Outdated Next.js Example</title>
-        </Head>
-        <h1>Outdated Next.js Example</h1>
-        <ul>
-          {posts.map((post) => (
-            <li key={post.id}>{post.title}</li>
-          ))}
-        </ul>
-      </div>
-    );
-  }
-}
+    },
+  };
+};
 
 export default Home;
