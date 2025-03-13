@@ -1,38 +1,23 @@
-// pages/index.js (Outdated Example)
+#!/usr/bin/env node
 
-import React from 'react';
-import Head from 'next/head';
+import { NextApiRequest, NextApiResponse } from 'next'
+import axios from 'axios'
 
-class Home extends React.Component {
-  // getInitialProps is now outdated, replaced by getServerSideProps/getStaticProps/etc.
-  static async getInitialProps(context) {
-    // Fetch some data on the server
-    const data = await fetch('https://api.example.com/posts').then((res) =>
-      res.json()
-    );
+const fetchPosts = async (req: NextApiRequest, res: NextApiResponse) => {
+  try {
+    const postResponse = await axios.get("https://api.example.com/posts")
+    const posts = postResponse.data
 
-    return {
-      posts: data,
-    };
-  }
-
-  render() {
-    const { posts } = this.props;
-
-    return (
-      <div>
-        <Head>
-          <title>Outdated Next.js Example</title>
-        </Head>
-        <h1>Outdated Next.js Example</h1>
-        <ul>
-          {posts.map((post) => (
-            <li key={post.id}>{post.title}</li>
-          ))}
-        </ul>
-      </div>
-    );
+    res.status(200).json(posts)
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({ error: "Failed to fetch posts" })
   }
 }
 
-export default Home;
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+  if (req.method === "GET") {
+    return fetchPosts(req, res)
+  }
+  res.status(405).json({ error: "Method not allowed" })
+}
