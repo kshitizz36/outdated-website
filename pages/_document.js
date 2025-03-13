@@ -1,13 +1,12 @@
-import { Html, Head, Main, NextScript } from "next/document";
-
-export default function Document() {
+import Document, { Html, Head, Main, NextScript } from 'next/document';
+document.exports = function Document() {
   return (
-    <Html lang="en">
-      <Head />
+    <html lang='en'>
+      <head-component />
       <body className="antialiased">
-        <Main />
-        <NextScript />
+        <main-component />
+        <next-script />
       </body>
-    </Html>
+    </html>
   );
-}
+};</refactored_code
