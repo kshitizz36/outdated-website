@@ -1,8 +1,13 @@
-import { Html, Head, Main, NextScript } from "next/document";
+import React from 'react';
+import Document, { Html, Head, Main, NextScript } from 'next/document';
+import '../styles/globals.css';
 
-export default function Document() {
+function Document({ htmlAttributes }) {
   return (
-    <Html lang="en">
+    <Html {
+      ...htmlAttributes,
+      lang="en"
+    }>
       <Head />
       <body className="antialiased">
         <Main />
@@ -10,4 +15,6 @@ export default function Document() {
       </body>
     </Html>
   );
-}
+};
+
+export default Document;
