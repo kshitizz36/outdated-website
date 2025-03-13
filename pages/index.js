@@ -1,38 +1,34 @@
-// pages/index.js (Outdated Example)
+import { useRouter } from 'next/router';
+import { useState, useEffect } from 'react';
 
-import React from 'react';
-import Head from 'next/head';
+function Home() {
+  const [posts, setPosts] = useState([]);
+  const router = useRouter();
 
-class Home extends React.Component {
-  // getInitialProps is now outdated, replaced by getServerSideProps/getStaticProps/etc.
-  static async getInitialProps(context) {
-    // Fetch some data on the server
-    const data = await fetch('https://api.example.com/posts').then((res) =>
-      res.json()
-    );
-
-    return {
-      posts: data,
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await fetch('https://api.example.com/posts');
+        const data = await res.json();
+        setPosts(data);
+      } catch (error) {
+        console.error(error);
+      }
     };
-  }
+    fetchData();
+  }, []);
 
-  render() {
-    const { posts } = this.props;
-
-    return (
-      <div>
-        <Head>
-          <title>Outdated Next.js Example</title>
-        </Head>
-        <h1>Outdated Next.js Example</h1>
-        <ul>
-          {posts.map((post) => (
-            <li key={post.id}>{post.title}</li>
-          ))}
-        </ul>
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      <h1>Outdated Next.js Example</h1>
+      <ul>
+        {posts.map((post) => (
+          <li key={post.id}>{post.title}</li>
+        ))}
+      </ul>
+      <button onClick={() => router.push('/posts/' + post.id)}>View post</button>
+    </div>
+  );
+};
 
 export default Home;
