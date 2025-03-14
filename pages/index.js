@@ -1,38 +1,27 @@
-// pages/index.js (Outdated Example)
+import Head from 'next/head'; import Link from 'next/link'; import React from 'react';
 
-import React from 'react';
-import Head from 'next/head';
+function Home({posts}) {
+  const fetchPosts = async () => {
+    const response = await fetch('https://api.example.com/posts');
+    return await response.json();
+  };
 
-class Home extends React.Component {
-  // getInitialProps is now outdated, replaced by getServerSideProps/getStaticProps/etc.
-  static async getInitialProps(context) {
-    // Fetch some data on the server
-    const data = await fetch('https://api.example.com/posts').then((res) =>
-      res.json()
-    );
+  const { data: posts } = fetchPosts();
 
-    return {
-      posts: data,
-    };
-  }
-
-  render() {
-    const { posts } = this.props;
-
-    return (
-      <div>
-        <Head>
-          <title>Outdated Next.js Example</title>
-        </Head>
-        <h1>Outdated Next.js Example</h1>
-        <ul>
-          {posts.map((post) => (
-            <li key={post.id}>{post.title}</li>
-          ))}
-        </ul>
-      </div>
-    );
-  }
+  return (
+    <div>
+      <Head>
+        <title>Outdated Next.js Example</title>
+      </Head>
+      <Link href='/'><a>Home</a></Link>
+      <h1>Outdated Next.js Example</h1>
+      <ul>
+        {posts.map(post => <li key={post.id}>{post.title}</li>)}
+      </ul>
+    </div>
+  );
 }
 
-export default Home;
+goAuth({ getStaticProps: fetchPosts });
+
+goAuthHome('/', { getStaticProps: fetchPosts });
