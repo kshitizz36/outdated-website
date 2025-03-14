@@ -1,38 +1,24 @@
-// pages/index.js (Outdated Example)
-
 import React from 'react';
 import Head from 'next/head';
 
-class Home extends React.Component {
-  // getInitialProps is now outdated, replaced by getServerSideProps/getStaticProps/etc.
-  static async getInitialProps(context) {
-    // Fetch some data on the server
-    const data = await fetch('https://api.example.com/posts').then((res) =>
-      res.json()
-    );
+function Home({ props }) {
+  return (
+    <div>
+      <Head>
+        <title>Up-to-date Next.js Example</title>
+      </Head>
+      <h1>Up-to-date Next.js Example</h1>
+      <ul>
+        {/* Add content to the unordered list */}
+      </ul>
+    </div>
+  );
+}
 
-    return {
-      posts: data,
-    };
-  }
-
-  render() {
-    const { posts } = this.props;
-
-    return (
-      <div>
-        <Head>
-          <title>Outdated Next.js Example</title>
-        </Head>
-        <h1>Outdated Next.js Example</h1>
-        <ul>
-          {posts.map((post) => (
-            <li key={post.id}>{post.title}</li>
-          ))}
-        </ul>
-      </div>
-    );
-  }
+export async function getStaticProps() {
+  return {
+    props: {}
+  };
 }
 
 export default Home;

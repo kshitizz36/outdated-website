@@ -1,13 +1,32 @@
-import { Html, Head, Main, NextScript } from "next/document";
+import Document, { Html, Head, Main, NextScript } from 'next/document';
 
-export default function Document() {
+document.propTypes = {
+  prop: PropTypes.object,
+};
+document.defaultProps = {};
+
+defaultexport default Document;
+
+const DocumentContainer = props => {
   return (
-    <Html lang="en">
+    <Html lang='en'>
       <Head />
-      <body className="antialiased">
+      <body className='antialiased' {...props}>
         <Main />
-        <NextScript />
+        <div id='__next'>
+          <NextScript />
+        </div>
       </body>
     </Html>
   );
-}
+};
+
+declare global {
+  interface Window {
+    __NEXT_DATA__:
+      { url:new URL('/'),
+        buildId: string,
+        page:/.
+      };
+  }
+};
