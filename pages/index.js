@@ -1,38 +1,45 @@
-// pages/index.js (Outdated Example)
+import { NextPage, GetServerSideProps } from 'next';
 
-import React from 'react';
-import Head from 'next/head';
-
-class Home extends React.Component {
-  // getInitialProps is now outdated, replaced by getServerSideProps/getStaticProps/etc.
-  static async getInitialProps(context) {
-    // Fetch some data on the server
-    const data = await fetch('https://api.example.com/posts').then((res) =>
-      res.json()
-    );
-
-    return {
-      posts: data,
-    };
-  }
-
-  render() {
-    const { posts } = this.props;
-
-    return (
-      <div>
-        <Head>
-          <title>Outdated Next.js Example</title>
-        </Head>
-        <h1>Outdated Next.js Example</h1>
-        <ul>
-          {posts.map((post) => (
-            <li key={post.id}>{post.title}</li>
-          ))}
-        </ul>
-      </div>
-    );
-  }
+interface Data {
+  id: number;
+  title: string;
 }
 
-export default Home;
+const HomePage: NextPage = () => {
+  const { data } = use FetchData();
+  return (
+    <div>
+      <Head>
+        <title>Next.js Example</title>
+      </Head>
+      <h1>Next.js Example</h1>
+      <ul>
+        {data.map((post: Data) => (
+          <li key={post.id}>{post.title}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+function FetchData() {
+  const [data, setData] = useState( [] );
+
+ async function updateData() {
+  const response = await fetch('https://api.example.com/posts');
+  const data = await response.json();
+  setData(data);
+  }
+
+      return updateData.apply(this);
+}
+
+export async function getServerSideProps() {
+  const response = await fetch('https://api.example.com/posts');
+  const data = await response.json();
+  return {
+    props: { data },
+  };
+}
+
+export default HomePage;
