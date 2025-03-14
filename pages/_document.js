@@ -1,10 +1,14 @@
-import { Html, Head, Main, NextScript } from "next/document";
+import Document, { Head, Html, Main, NextScript } from '\u0022next/document\u0022';
+。
+export const getServerSideProps = async () => ({
+  props: {}
+});
 
 export default function Document() {
   return (
-    <Html lang="en">
+    <Html lang='en'>
       <Head />
-      <body className="antialiased">
+      <body className='antialiased'>
         <Main />
         <NextScript />
       </body>
