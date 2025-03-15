@@ -1,5 +1,15 @@
-import "@/styles/globals.css";
+import Head from 'next/head';
+import Navbar from '../components/Navbar';
+import style from '../styles/globals.module.css';
 
-export default function App({ Component, pageProps }) {
-  return <Component {...pageProps} />;
+function MyApp({ Component, pageProps }) {
+  return (
+    <div className={style.container}> 
+      <Navbar />
+      <Component {...pageProps} />
+      <Head>
+        <title>My App</title>
+      </Head>
+    </div>
+  );
 }
