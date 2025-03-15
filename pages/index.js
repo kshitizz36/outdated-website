@@ -1,34 +1,30 @@
 import React from 'react';
 import Head from 'next/head';
 
-class Home extends React.Component {
-  static async getStaticProps(context) {
-    // Fetch some data on the server and cache it
-    const cache = await globalThis.fetch('https://api.example.com/posts').then((res) => res.json());
-    return {
-      // Cache posts to avoid requests at runtime
-      props: {
-        posts: cache,
-      },
-    };
-  }
-
-  render() {
-    const { posts } = this.props;
-
-    return (
-      <div>
-        <Head>
-          <title>Cache data per page at build time using getStaticProps</title>
-        </Head>
-        <h1>Cache data per page at build time using getStaticProps</h1>
-        <ul>
-          {posts.map((post) => (
-            <li key={post.id}>{post.title}</li>
-          ))}
-        </ul>
-      </div>
-    );
-  }
+function Home({ posts }) {
+  return (
+    <div>
+      <Head>
+        <title>Updated Next.js Example</title>
+      </Head>
+      <h1>Updated Next.js Example</h1>
+      <ul>
+        {posts.map((post) => (
+          <li key={post.id}>{post.title}</li>
+        ))}
+      </ul>
+    </div>
+  );
 }
+
+export async function getServerSideProps() {
+  const res = await fetch('https://api.example.com/posts');
+  const data = await res.json();
+  return {
+    props: {
+      posts: data,
+    },
+  };
+}
+
 export default Home;
