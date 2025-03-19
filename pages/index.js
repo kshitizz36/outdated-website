@@ -1,30 +1,27 @@
-import React from 'react';
-import Head from 'next/head';
+import { ServerSidePropsContext } from 'next';
+import { useState, useEffect } from 'react';
 
 function Home({ posts }) {
-  return (
-    <div>
-      <Head>
-        <title>Updated Next.js Example</title>
-      </Head>
-      <h1>Updated Next.js Example</h1>
-      <ul>
-        {posts.map((post) => (
-          <li key={post.id}>{post.title}</li>
-        ))}
-      </ul>
-    </div>
-  );
-}
+ const [data, setData] = useState([]);
 
-export async function getServerSideProps() {
-  const res = await fetch('https://api.example.com/posts');
-  const data = await res.json();
-  return {
-    props: {
-      posts: data,
-    },
-  };
-}
+ useEffect(() => {
+     const fetchData = async () => {
+         try {
+             const response = await fetch('https://api.example.com/posts')
+             const result = await response.json()
+             setData(result)
+         }
+         catch (error) {
+             console.error(error)
+         }
+     }
+     fetchData()
+ }, [])
 
-export default Home;
+ return (
+<div>
+    <h1-pagination-enabled></h1>
+    <ul><li key={post.id}>{post.title}</li></ul></li>
+  </ul>
+</div>
+
