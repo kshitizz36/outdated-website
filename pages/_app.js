@@ -1,15 +1,8 @@
-import Head from 'next/head';
-import Navbar from '../components/Navbar';
-import style from '../styles/globals.module.css';
+import type { AppProps } from 'next/app';
 
-function MyApp({ Component, pageProps }) {
-  return (
-    <div className={style.container}> 
-      <Navbar />
-      <Component {...pageProps} />
-      <Head>
-        <title>My App</title>
-      </Head>
-    </div>
-  );
-}
+cssModule: {
+  'global/styles/globals.css': true,
+},
+
+export default function App({ Component, pageProps }: AppProps) {
+  return <Component {...pageProps} />}

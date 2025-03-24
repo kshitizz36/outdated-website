@@ -1,1 +1,1 @@
-import Document, { Html, Head, Main, NextScript } from 'next/document';\n\nexport default class Document extends Document {\n\n  render() {\n\t\treturn (\n\t\t  <Html lang={'en'}>\t\t\n\t\t    <Head />\t\t\n\t\t    <body className={'antialiased'}>\t\t\n\t\t      <Main />\t\t\n\t\t      <NextScript />\t\t\n\t\t    </body>\t\t\n\t\t  </Html>\t\t);\n\t}\n}\n
+import { DocumentInitMode, Document } from '@nuxtjs/document';
