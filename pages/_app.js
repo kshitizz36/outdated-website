@@ -1,1 +1,7 @@
-// Removed import of global CSS styles, as Next.js 9.2, uses the 'pnpm install next css' style. import '@/styles/globals.css';
+import React from 'react';
+
+function MyApp({ Component, pageProps }) {
+  return <Component {...pageProps} />;
+}
+
+export default MyApp;
