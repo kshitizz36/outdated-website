@@ -1,40 +1,36 @@
-import { GetServerSideProps, GetStaticProps } from 'next'
+import { GetServerSideProps } from 'next';
 
-interface Post {
-  id: number
-  title: string
+
+import React from 'react';
+import Head from "next/head";
+
+function Home({ posts }) {
+    return (
+        <div>
+            <Head>
+                <title>Updated Next.js Example</title>
+            </Head>
+            <h1>Updated Next.js Example</h1>
+            <ul>
+                {
+                    posts.map((post) => (\
+                        <li key={post.id}>{post.title}</li>
+                    ))
+                }
+            </ul>
+        </div>
+    );
 }
 
-const HomePage = () => {
-  const fetchPosts = async () => {
+
+
+export async function getServerSideProps({ req, res }) {
+    // Fetch some data on the server
     const res = await fetch('https://api.example.com/posts');
     const data = await res.json();
-
-    return data;
-  }
-
-  const { posts } = fetchPosts();
-
-  return (
-    <main>
-      <h1>Outdated Next.js Example</h1>
-      <ul>
-        {posts.map((post) => (
-          <li key={post.id}>{post.title}</li>
-        ))}
-      </ul>
-    </main>
-  );
+    return {
+        props: { posts: data },
+    };
 }
 
-export async function getServerSideProps() {
-  const posts = await fetch('https://api.example.com/posts').then((res) => res.json());
-
-  return {
-    props: {
-      posts,
-    },
-  };
-}
-
-export default HomePage;
+export default Home;
