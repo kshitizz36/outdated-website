@@ -1,1 +1,40 @@
-import { useState, useEffect } from 'react'; import Head from 'next/head'; import Link from 'next/link'; const Home = () => {   const [posts, setPosts] = useState([]);   useEffect(() => {     async function fetchPosts() {       try {         const response = await fetch('https://api.example.com/posts');         const data = await response.json();         setPosts(data);       } catch (error) {         console.error(error);       }     }     fetchPosts();   }, []);   return (     <div>       <Head>         <title>Updated Next.js Example</title>       </Head>       <h1>Updated Next.js Example</h1>       <ul>         {posts.map((post) => (           <li key={post.id}>             <Link href={`/post/${post.id}`}>{post.title}</Link>           </li>         ))}       </ul>     </div>   ); }; export default Home;
+import { GetServerSideProps, GetStaticProps } from 'next'
+
+interface Post {
+  id: number
+  title: string
+}
+
+const HomePage = () => {
+  const fetchPosts = async () => {
+    const res = await fetch('https://api.example.com/posts');
+    const data = await res.json();
+
+    return data;
+  }
+
+  const { posts } = fetchPosts();
+
+  return (
+    <main>
+      <h1>Outdated Next.js Example</h1>
+      <ul>
+        {posts.map((post) => (
+          <li key={post.id}>{post.title}</li>
+        ))}
+      </ul>
+    </main>
+  );
+}
+
+export async function getServerSideProps() {
+  const posts = await fetch('https://api.example.com/posts').then((res) => res.json());
+
+  return {
+    props: {
+      posts,
+    },
+  };
+}
+
+export default HomePage;
