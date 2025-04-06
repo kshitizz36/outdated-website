@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import React from 'react';
 import Head from 'next/head';
 
-function Home({ posts }) {
+const Home = ({ posts }) => {
   return (
     <div>
       <Head>
@@ -15,15 +15,15 @@ function Home({ posts }) {
       </ul>
     </div>
   );
-}
+};
 
-export async function getServerSideProps() {
+export const getServerSideProps = async () => {
   const res = await fetch('https://api.example.com/posts');
-  const data = await res.json();
-
   return {
     props: {
-      posts: data,
+      posts: await res.json(),
     },
   };
-}
+};
+
+export default Home;
