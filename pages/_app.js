@@ -1,18 +1,13 @@
-// Remove import statement by importing styles in a more modern way using the next/config module
-import { appDir, publicUrlWithHash, publicUrl } from 'next/config';
+import React from 'react';
+import Head from 'next/head';
 
-// If you still need to dynamically import components, use getStaticProps. Here is an updated version of your file using this approach.
-import Head from 'next/head';  // Next.js needs to update React version to dynamically import on getStaticProps
-
-export default function App({ Component, pageProps }) {
-  const { appDir, publicUrlWithHash, publicUrl } = require('next/config').default();
-
+function App({ Component, pageProps }) {
   return (
-    <>
+    <div>
       <Head>
-        <link rel="stylesheet" href={appDir + "/styles/globals.css"} />
+        <title>My Next App</title>
       </Head>
       <Component {...pageProps} />
-    </>
+    </div>
   );
 }
