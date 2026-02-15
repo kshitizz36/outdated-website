@@ -1,5 +1,10 @@
-import "@/styles/globals.css";
+import '@/styles/globals.css';
 
-export default function App({ Component, pageProps }) {
+type AppProps = {
+  Component: React.ComponentType<any>;
+  pageProps: any;
+};
+
+export default function App({ Component, pageProps }: AppProps) {
   return <Component {...pageProps} />;
 }
