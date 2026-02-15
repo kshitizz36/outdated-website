@@ -1,5 +1,10 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
+// Next.js API route support: https://nextjs.org/docs/app/building-your-application/routing/route-handlers
 
-export default function handler(req, res) {
-  res.status(200).json({ name: "John Doe" });
+export async function GET(request) {
+  return new Response(JSON.stringify({ name: "John Doe" }), {
+    status: 200,
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  });
 }
