@@ -1,0 +1,35 @@
+mode: enforce
+
+exclude_dirs:
+  - node_modules
+  - .git
+  - .next
+
+exclude_files:
+  - "*.lock"
+  - "*.map"
+
+layers:
+  regex:
+    enabled: true
+  entropy:
+    enabled: true
+    threshold: 4.5
+    min_length: 20
+  ast:
+    enabled: true
+    sensitive_vars:
+      - system_prompt
+      - api_key
+      - secret
+      - password
+      - token
+      - private_key
+      - credentials
+  semantic:
+    enabled: false
+
+audit:
+  enabled: true
+  path: .aegis/audit.jsonl
+  hmac_key_path: .aegis/hmac.key
